@@ -24,22 +24,22 @@ migrate_working_dir/
 #.vscode/
 
 # Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
-.dart_tool/
-.flutter-plugins
-.flutter-plugins-dependencies
-.pub-cache/
-.pub/
-/build/
+loomai_app/**/doc/api/
+loomai_app/**/ios/Flutter/.last_build_id
+loomai_app/.dart_tool/
+loomai_app/.flutter-plugins
+loomai_app/.flutter-plugins-dependencies
+loomai_app/.pub-cache/
+loomai_app/.pub/
+loomai_app/build/
 
 # Symbolication related
-app.*.symbols
+loomai_app/app.*.symbols
 
 # Obfuscation related
-app.*.map.json
+loomai_app/app.*.map.json
 
 # Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
+loomai_app/android/app/debug
+loomai_app/android/app/profile
+loomai_app/android/app/release
