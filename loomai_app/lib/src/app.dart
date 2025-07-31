@@ -37,8 +37,14 @@ class _AppState extends State<App> {
         body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.chat), label: '對話'),
-            BottomNavigationBarItem(icon: Icon(Icons.people), label: '靈魂編碼'),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.messenger_outlined),
+              label: '對話',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.style_rounded),
+              label: '靈魂編碼',
+            ),
             BottomNavigationBarItem(icon: Icon(Icons.memory), label: '回憶盒子'),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: '檔案'),
           ],
