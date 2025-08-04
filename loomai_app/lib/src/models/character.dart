@@ -2,7 +2,7 @@ class Character {
   final String name;
   final String backstory;
   final String personality;
-  final String imageUrl;
+  final String imageUrl; //先用來demo資料
   final String greeting;
   final String userName;
   final String tags;

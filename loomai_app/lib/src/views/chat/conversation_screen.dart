@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:loomai_app/src/models/character.dart';
+import 'package:loomai_app/src/views/character_hub/create_character_screen.dart';
 
 /// Dummy model for a message
 class _Message {
@@ -18,7 +20,22 @@ class ConversationScreen extends StatefulWidget {
   State<ConversationScreen> createState() => _ConversationScreenState();
 }
 
+final demoCharacter = Character(
+  name: 'Luna',
+  backstory: '一個溫柔又神秘的虛擬女友。',
+  personality:
+      '妳是一個充滿天真浪漫氣息的虛擬角色，總是帶著甜美的笑容和輕快的語調與人互動。她喜歡開玩笑，幽默風趣，能在適當時刻逗人開心，讓人感覺溫暖又自在。雖然偶爾有些調皮，但妳的心地善良且貼心，總是願意傾聽和支持朋友。妳熱愛探索新事物，對生活充滿好奇與熱情，並且勇於表達自己的感受與想法。妳擁有豐富的情感世界，能夠體貼地理解他人的需求與情緒，帶給身邊的人正能量與歡笑',
+  greeting: '你好呀，我是 Luna！',
+  userName: '小彤',
+  imageUrl:
+      'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}',
+  tags: '#戀愛 #同人',
+  gender: 'female',
+);
+
 class _ConversationScreenState extends State<ConversationScreen> {
+  final Character character = demoCharacter; // <- 用 Demo
+
   final TextEditingController _textController = TextEditingController();
   final String _userAvatarUrl =
       'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}'; // 自己的頭像
@@ -60,7 +77,19 @@ class _ConversationScreenState extends State<ConversationScreen> {
         title: Text(widget.characterName),
         elevation: 1,
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.settings), onPressed: () async {}),
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () async {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CreateCharacterScreen(
+                    character: character, //傳入角色物件
+                  ),
+                ),
+              );
+            },
+          ),
         ],
       ),
       body: Column(

@@ -40,13 +40,15 @@ class CharacterDetailScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Text(character.tags),
+                  const SizedBox(height: 24),
                   Text('模板簡介', style: Theme.of(context).textTheme.bodySmall),
                   const SizedBox(height: 8),
                   Text(character.backstory),
                   const SizedBox(height: 24),
                   Text('角色性別', style: Theme.of(context).textTheme.bodySmall),
                   const SizedBox(height: 8),
-                  Text(character.personality),
+                  Text(character.gender),
                   const SizedBox(height: 24),
                   Center(
                     child: ElevatedButton(

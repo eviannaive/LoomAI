@@ -20,6 +20,7 @@ class _CharacterHubScreenState extends State<CharacterHubScreen> {
       personality: '安靜、內向，但內心充滿了對未知世界的好奇。',
       imageUrl:
           'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}',
+      tags: '#女性向#高冷#神秘',
     ),
     Character(
       name: 'Orion',
@@ -27,6 +28,7 @@ class _CharacterHubScreenState extends State<CharacterHubScreen> {
       personality: '勇敢、正直，有著堅定的信念和不屈不撓的精神。',
       imageUrl:
           'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}',
+      tags: '#女性向#高冷#神秘',
     ),
     Character(
       name: 'Seraphina',
@@ -34,6 +36,7 @@ class _CharacterHubScreenState extends State<CharacterHubScreen> {
       personality: '溫柔、善良，對所有生命都充滿了愛與同情。',
       imageUrl:
           'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}',
+      tags: '#女性向#高冷#神秘',
     ),
     Character(
       name: 'Kai',
@@ -41,6 +44,7 @@ class _CharacterHubScreenState extends State<CharacterHubScreen> {
       personality: '自由、不羈，對陸地世界充滿了好奇與探索的慾望。',
       imageUrl:
           'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}',
+      tags: '#女性向#高冷#神秘',
     ),
   ];
 
