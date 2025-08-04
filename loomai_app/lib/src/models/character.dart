@@ -5,6 +5,7 @@ class Character {
   final String imageUrl; //先用來demo資料
   final String greeting;
   final String userName;
+  final String? userAvatarUrl;
   final String tags;
   final String gender;
 
@@ -15,6 +16,7 @@ class Character {
     required this.imageUrl,
     this.greeting = '',
     this.userName = '',
+    this.userAvatarUrl,
     this.tags = '',
     this.gender = 'male',
   });

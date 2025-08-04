@@ -22,6 +22,7 @@ class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
   final _aiNameController = TextEditingController();
   final _userNameController = TextEditingController();
   final _imageUrlController = TextEditingController();
+  final _userAvatarUrlController = TextEditingController();
   final _templateController = TextEditingController();
   final _templateDescController = TextEditingController();
   final _greetingController = TextEditingController();
@@ -36,6 +37,7 @@ class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
     _aiNameController.dispose();
     _userNameController.dispose();
     _imageUrlController.dispose();
+    _userAvatarUrlController.dispose();
     _templateController.dispose();
     _templateDescController.dispose();
     _greetingController.dispose();
@@ -54,6 +56,7 @@ class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
       _aiNameController.text = c.name;
       _userNameController.text = c.userName ?? '';
       _imageUrlController.text = c.imageUrl ?? '';
+      _userAvatarUrlController.text = c.userAvatarUrl ?? '';
       _templateController.text = c.personality ?? '';
       _templateDescController.text = c.backstory ?? '';
       _greetingController.text = c.greeting ?? '';
@@ -70,6 +73,7 @@ class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
         backstory: _templateDescController.text,
         personality: _templateController.text,
         imageUrl: _imageUrlController.text,
+        userAvatarUrl: _userAvatarUrlController.text,
         greeting: _greetingController.text,
         userName: _userNameController.text,
         tags: _tagsController.text,
@@ -198,10 +202,14 @@ class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
                     onTap: _onUploadUserAvatar, // 點擊觸發上傳事件
                     child: CircleAvatar(
                       radius: 30,
-                      backgroundImage: _userAvatar != null
-                          ? FileImage(_userAvatar!) // 預覽已選擇圖片
-                          : null,
-                      child: _userAvatar == null
+                      backgroundImage:
+                          (_userAvatarUrlController.text.isNotEmpty)
+                          ? NetworkImage(_userAvatarUrlController.text)
+                          : (_aiAvatar != null ? FileImage(_aiAvatar!) : null)
+                                as ImageProvider?,
+                      child:
+                          (_userAvatarUrlController.text.isEmpty &&
+                              _aiAvatar == null)
                           ? const Icon(Icons.add_a_photo, size: 24)
                           : null,
                     ),

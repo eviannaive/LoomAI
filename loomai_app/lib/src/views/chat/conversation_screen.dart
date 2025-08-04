@@ -29,6 +29,8 @@ final demoCharacter = Character(
   userName: '小彤',
   imageUrl:
       'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}',
+  userAvatarUrl:
+      'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}',
   tags: '#戀愛 #同人',
   gender: 'female',
 );
