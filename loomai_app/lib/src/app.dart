@@ -49,6 +49,9 @@ class _AppState extends State<App> {
             BottomNavigationBarItem(icon: Icon(Icons.person), label: '檔案'),
           ],
           currentIndex: _selectedIndex,
+          unselectedItemColor:
+              AppTheme.vibrantVioletTheme.colorScheme.secondary,
+          selectedItemColor: Theme.of(context).colorScheme.primary,
           onTap: _onItemTapped,
         ),
       ),

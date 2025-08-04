@@ -41,7 +41,7 @@ class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create Character'),
+        title: const Text('創造角色'),
         actions: [
           IconButton(
             icon: const Icon(Icons.save),

@@ -68,7 +68,7 @@ class _CharacterHubScreenState extends State<CharacterHubScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Character Hub'),
+        title: const Text('靈魂編碼'),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
       ),
