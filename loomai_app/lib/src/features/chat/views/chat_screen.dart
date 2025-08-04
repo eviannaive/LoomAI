@@ -57,9 +57,21 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Chats'),
+        title: const Text('對話'),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () async {
+              final newCharacter = await navigateToCreateCharacter(context);
+              if (newCharacter != null) {
+                // 這裡你要決定要怎麼用 newCharacter，比如加到某個列表
+                print('Created character: ${newCharacter.name}');
+              }
+            },
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: _chatSessions.length,
@@ -84,17 +96,6 @@ class _ChatScreenState extends State<ChatScreen> {
             onTap: () => _navigateToConversation(session.characterName),
           );
         },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final newCharacter = await navigateToCreateCharacter(context);
-          if (newCharacter != null) {
-            // 這裡你要決定要怎麼用 newCharacter，比如加到某個列表
-            print('Created character: ${newCharacter.name}');
-          }
-        },
-        tooltip: 'Create Character',
-        child: const Icon(Icons.add),
       ),
     );
   }

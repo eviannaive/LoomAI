@@ -13,10 +13,10 @@ class CharacterHubScreen extends StatefulWidget {
 class _CharacterHubScreenState extends State<CharacterHubScreen> {
   // Dummy data - now using the proper Character model
   final List<Character> _characters = [
-    Character(name: 'Luna', backstory: '', personality: ''),
-    Character(name: 'Orion', backstory: '', personality: ''),
-    Character(name: 'Seraphina', backstory: '', personality: ''),
-    Character(name: 'Kai', backstory: '', personality: ''),
+    Character(name: 'Luna', backstory: '', personality: '', imageUrl: 'https://i.pravatar.cc/150?u=a042581f4e29026704d'),
+    Character(name: 'Orion', backstory: '', personality: '', imageUrl: 'https://i.pravatar.cc/150?u=a042581f4e29026704e'),
+    Character(name: 'Seraphina', backstory: '', personality: '', imageUrl: 'https://i.pravatar.cc/150?u=a042581f4e29026704f'),
+    Character(name: 'Kai', backstory: '', personality: '', imageUrl: 'https://i.pravatar.cc/150?u=a042581f4e29026704g'),
   ];
 
   @override
@@ -53,25 +53,23 @@ class _CharacterHubScreenState extends State<CharacterHubScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Expanded(
-                    child: Container(
-                      color: Theme.of(
-                        context,
-                      ).colorScheme.secondary.withOpacity(0.2),
-                      child: Center(
-                        child: CircleAvatar(
-                          radius: 40,
-                          backgroundColor: Theme.of(
-                            context,
-                          ).colorScheme.secondary,
-                          child: Text(
-                            character.name[0],
-                            style: const TextStyle(
-                              fontSize: 32,
-                              color: Colors.white,
+                    child: Image.network(
+                      character.imageUrl,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .secondary
+                              .withOpacity(0.2),
+                          child: Center(
+                            child: Icon(
+                              Icons.error,
+                              color: Theme.of(context).colorScheme.error,
                             ),
                           ),
-                        ),
-                      ),
+                        );
+                      },
                     ),
                   ),
                   Padding(

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 // Dummy model for a message
@@ -43,6 +42,9 @@ class _ConversationScreenState extends State<ConversationScreen> {
       appBar: AppBar(
         title: Text(widget.characterName),
         elevation: 1,
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.settings), onPressed: () async {}),
+        ],
       ),
       body: Column(
         children: <Widget>[
@@ -74,7 +76,9 @@ class _ConversationScreenState extends State<ConversationScreen> {
       margin: const EdgeInsets.symmetric(vertical: 10.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: message.isFromUser ? MainAxisAlignment.end : MainAxisAlignment.start,
+        mainAxisAlignment: message.isFromUser
+            ? MainAxisAlignment.end
+            : MainAxisAlignment.start,
         children: <Widget>[
           Flexible(
             child: Container(
@@ -88,7 +92,9 @@ class _ConversationScreenState extends State<ConversationScreen> {
               child: Text(
                 message.text,
                 style: TextStyle(
-                  color: message.isFromUser ? Colors.white : Theme.of(context).textTheme.bodyLarge?.color,
+                  color: message.isFromUser
+                      ? Colors.white
+                      : Theme.of(context).textTheme.bodyLarge?.color,
                 ),
               ),
             ),
@@ -109,7 +115,9 @@ class _ConversationScreenState extends State<ConversationScreen> {
               child: TextField(
                 controller: _textController,
                 onSubmitted: _handleSubmitted,
-                decoration: const InputDecoration.collapsed(hintText: 'Send a message'),
+                decoration: const InputDecoration.collapsed(
+                  hintText: 'Send a message',
+                ),
               ),
             ),
             Container(

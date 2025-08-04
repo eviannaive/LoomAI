@@ -14,12 +14,14 @@ class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
   final _nameController = TextEditingController();
   final _backstoryController = TextEditingController();
   final _personalityController = TextEditingController();
+  final _imageUrlController = TextEditingController();
 
   @override
   void dispose() {
     _nameController.dispose();
     _backstoryController.dispose();
     _personalityController.dispose();
+    _imageUrlController.dispose();
     super.dispose();
   }
 
@@ -29,6 +31,7 @@ class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
         name: _nameController.text,
         backstory: _backstoryController.text,
         personality: _personalityController.text,
+        imageUrl: _imageUrlController.text,
       );
       // Pass the new character back to the previous screen
       Navigator.of(context).pop(newCharacter);
@@ -68,6 +71,15 @@ class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
                   }
                   return null;
                 },
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: _imageUrlController,
+                decoration: const InputDecoration(
+                  labelText: 'Image URL',
+                  hintText: 'E.g., https://example.com/image.png',
+                  border: OutlineInputBorder(),
+                ),
               ),
               const SizedBox(height: 16),
               TextFormField(
