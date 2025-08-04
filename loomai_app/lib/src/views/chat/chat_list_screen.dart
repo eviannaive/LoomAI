@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:loomai_app/src/features/chat/views/conversation_screen.dart';
-import 'package:loomai_app/src/shared/widgets/navigation_helpers.dart';
+import 'package:loomai_app/src/views/chat/conversation_screen.dart';
+import 'package:loomai_app/src/widgets/navigation_helpers.dart';
 
 // Dummy model for a chat session
 class _ChatSession {

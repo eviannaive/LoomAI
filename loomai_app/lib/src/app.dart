@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:loomai_app/src/features/character_hub/views/character_hub_screen.dart';
-import 'package:loomai_app/src/features/chat/views/chat_screen.dart';
-import 'package:loomai_app/src/features/memory_box/views/memory_box_screen.dart';
-import 'package:loomai_app/src/features/profile/views/profile_screen.dart';
-import 'package:loomai_app/src/shared/theme/theme.dart';
+import 'package:loomai_app/src/views/character_hub/character_hub_screen.dart';
+import 'package:loomai_app/src/views/chat/chat_list_screen.dart';
+import 'package:loomai_app/src/views/memory_box/memory_box_screen.dart';
+import 'package:loomai_app/src/views/profile/profile_screen.dart';
+import 'package:loomai_app/src/theme/theme.dart';
 
 class App extends StatefulWidget {
   const App({super.key});

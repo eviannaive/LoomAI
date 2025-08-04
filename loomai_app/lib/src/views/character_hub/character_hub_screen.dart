@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:loomai_app/src/features/character_hub/models/character.dart';
-import 'package:loomai_app/src/features/character_hub/views/create_character_screen.dart';
-import 'package:loomai_app/src/shared/widgets/navigation_helpers.dart';
+import 'package:loomai_app/src/models/character.dart';
+import 'package:loomai_app/src/views/character_hub/create_character_screen.dart';
+import 'package:loomai_app/src/widgets/navigation_helpers.dart';
 
 class CharacterHubScreen extends StatefulWidget {
   const CharacterHubScreen({super.key});
@@ -13,10 +13,55 @@ class CharacterHubScreen extends StatefulWidget {
 class _CharacterHubScreenState extends State<CharacterHubScreen> {
   // Dummy data - now using the proper Character model
   final List<Character> _characters = [
-    Character(name: 'Luna', backstory: '', personality: '', imageUrl: 'https://i.pravatar.cc/150?u=a042581f4e29026704d'),
-    Character(name: 'Orion', backstory: '', personality: '', imageUrl: 'https://i.pravatar.cc/150?u=a042581f4e29026704e'),
-    Character(name: 'Seraphina', backstory: '', personality: '', imageUrl: 'https://i.pravatar.cc/150?u=a042581f4e29026704f'),
-    Character(name: 'Kai', backstory: '', personality: '', imageUrl: 'https://i.pravatar.cc/150?u=a042581f4e29026704g'),
+    Character(
+      name: 'Luna',
+      backstory: '',
+      personality: '',
+      imageUrl:
+          'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}',
+    ),
+    Character(
+      name: 'Orion',
+      backstory: '',
+      personality: '',
+      imageUrl:
+          'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}',
+    ),
+    Character(
+      name: 'Seraphina',
+      backstory: '',
+      personality: '',
+      imageUrl:
+          'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}',
+    ),
+    Character(
+      name: 'Kai',
+      backstory: '',
+      personality: '',
+      imageUrl:
+          'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}',
+    ),
+    Character(
+      name: 'Kai',
+      backstory: '',
+      personality: '',
+      imageUrl:
+          'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}',
+    ),
+    Character(
+      name: 'Kai',
+      backstory: '',
+      personality: '',
+      imageUrl:
+          'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}',
+    ),
+    Character(
+      name: 'Kai',
+      backstory: '',
+      personality: '',
+      imageUrl:
+          'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}',
+    ),
   ];
 
   @override
@@ -58,10 +103,9 @@ class _CharacterHubScreenState extends State<CharacterHubScreen> {
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
                         return Container(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .secondary
-                              .withOpacity(0.2),
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.secondary.withOpacity(0.2),
                           child: Center(
                             child: Icon(
                               Icons.error,

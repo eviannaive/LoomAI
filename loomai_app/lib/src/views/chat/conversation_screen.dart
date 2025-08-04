@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// Dummy model for a message
+/// Dummy model for a message
 class _Message {
   final String text;
   final bool isFromUser;
@@ -8,6 +8,7 @@ class _Message {
   _Message(this.text, this.isFromUser);
 }
 
+/// 主畫面
 class ConversationScreen extends StatefulWidget {
   final String characterName;
 
@@ -27,11 +28,12 @@ class _ConversationScreenState extends State<ConversationScreen> {
   ];
 
   void _handleSubmitted(String text) {
+    if (text.trim().isEmpty) return;
+
     _textController.clear();
     setState(() {
-      _messages.insert(0, _Message(text, true));
-      // In a real app, you would send the message to the AI and get a response.
-      // For now, we'll just add a dummy response.
+      _messages.insert(0, _Message(text.trim(), true));
+      // 假設 AI 自動回覆
       _messages.insert(0, _Message("That's interesting! Tell me more.", false));
     });
   }
@@ -48,7 +50,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
       ),
       body: Column(
         children: <Widget>[
-          Flexible(
+          Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.all(8.0),
               reverse: true,
@@ -59,14 +61,17 @@ class _ConversationScreenState extends State<ConversationScreen> {
               },
             ),
           ),
-          const Divider(height: 1.0),
-          SafeArea(
-            child: Container(
-              decoration: BoxDecoration(color: Theme.of(context).cardColor),
-              child: _buildTextComposer(),
-            ),
-          ),
         ],
+      ),
+      bottomNavigationBar: Material(
+        elevation: 4,
+        color: Theme.of(context).cardColor,
+        child: SafeArea(
+          child: ChatInputBar(
+            controller: _textController,
+            onSubmitted: _handleSubmitted,
+          ),
+        ),
       ),
     );
   }
@@ -103,32 +108,45 @@ class _ConversationScreenState extends State<ConversationScreen> {
       ),
     );
   }
+}
 
-  Widget _buildTextComposer() {
-    return IconTheme(
-      data: IconThemeData(color: Theme.of(context).colorScheme.primary),
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Row(
-          children: <Widget>[
-            Flexible(
-              child: TextField(
-                controller: _textController,
-                onSubmitted: _handleSubmitted,
-                decoration: const InputDecoration.collapsed(
-                  hintText: 'Send a message',
-                ),
+/// 🔻 封裝輸入欄元件
+class ChatInputBar extends StatelessWidget {
+  final TextEditingController controller;
+  final void Function(String) onSubmitted;
+
+  const ChatInputBar({
+    super.key,
+    required this.controller,
+    required this.onSubmitted,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 6.0),
+      decoration: BoxDecoration(
+        border: Border(top: BorderSide(color: Colors.grey[300]!)),
+      ),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: TextField(
+              controller: controller,
+              onSubmitted: onSubmitted,
+              decoration: const InputDecoration.collapsed(
+                hintText: 'Send a message',
               ),
+              textInputAction: TextInputAction.send,
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 4.0),
-              child: IconButton(
-                icon: const Icon(Icons.send),
-                onPressed: () => _handleSubmitted(_textController.text),
-              ),
-            ),
-          ],
-        ),
+          ),
+          IconButton(
+            padding: EdgeInsets.zero,
+            constraints: const BoxConstraints(),
+            icon: const Icon(Icons.send),
+            onPressed: () => onSubmitted(controller.text),
+          ),
+        ],
       ),
     );
   }

@@ -1,6 +1,5 @@
-
 import 'package:flutter/material.dart';
-import 'package:loomai_app/src/features/character_hub/models/character.dart';
+import 'package:loomai_app/src/models/character.dart';
 
 class CreateCharacterScreen extends StatefulWidget {
   const CreateCharacterScreen({super.key});
@@ -96,7 +95,8 @@ class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
                 controller: _personalityController,
                 decoration: const InputDecoration(
                   labelText: 'Personality & System Prompt',
-                  hintText: 'Define their traits, speaking style, likes, and dislikes. This will be used as the OpenAI system message.',
+                  hintText:
+                      'Define their traits, speaking style, likes, and dislikes. This will be used as the OpenAI system message.',
                   border: OutlineInputBorder(),
                 ),
                 maxLines: 8,
