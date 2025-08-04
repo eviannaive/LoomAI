@@ -20,12 +20,26 @@ class ConversationScreen extends StatefulWidget {
 
 class _ConversationScreenState extends State<ConversationScreen> {
   final TextEditingController _textController = TextEditingController();
-  final List<_Message> _messages = [
-    _Message("Hello! How are you today?", false),
-    _Message("I'm doing great, thanks for asking!", true),
-    _Message("Just enjoying the beautiful weather.", true),
-    _Message("That sounds lovely. I'm glad to hear it.", false),
-  ];
+  final String _userAvatarUrl =
+      'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}'; // 自己的頭像
+  final String _characterAvatarUrl =
+      'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}'; // 對方頭像
+
+  // 初始宣告 _messages
+  late List<_Message> _messages;
+
+  // 開場：載入 message 內容
+  @override
+  void initState() {
+    super.initState();
+
+    _messages = [
+      _Message("Hello! How are you today?", false),
+      _Message("I'm doing great, thanks for asking!", true),
+      _Message("Just enjoying the beautiful weather.", true),
+      _Message("That sounds lovely. I'm glad to hear it.", false),
+    ];
+  }
 
   void _handleSubmitted(String text) {
     if (text.trim().isEmpty) return;
@@ -36,6 +50,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
       // 假設 AI 自動回覆
       _messages.insert(0, _Message("That's interesting! Tell me more.", false));
     });
+    _textController.clear();
   }
 
   @override
@@ -63,6 +78,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
           ),
         ],
       ),
+
       bottomNavigationBar: Material(
         elevation: 4,
         color: Theme.of(context).cardColor,
@@ -77,34 +93,58 @@ class _ConversationScreenState extends State<ConversationScreen> {
   }
 
   Widget _buildMessage(_Message message) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10.0),
+    final isUser = message.isFromUser;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 12),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: message.isFromUser
+        mainAxisAlignment: isUser
             ? MainAxisAlignment.end
             : MainAxisAlignment.start,
-        children: <Widget>[
+        children: [
+          if (!isUser)
+            CircleAvatar(
+              radius: 18,
+              backgroundImage: NetworkImage(_characterAvatarUrl),
+            ),
+          const SizedBox(width: 8),
           Flexible(
             child: Container(
-              padding: const EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: message.isFromUser
-                    ? Theme.of(context).colorScheme.primary.withOpacity(0.8)
-                    : Theme.of(context).colorScheme.secondary.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(18.0),
+                color: isUser ? Colors.blue[100] : Colors.grey[300],
+                borderRadius: BorderRadius.circular(10),
               ),
-              child: Text(
-                message.text,
-                style: TextStyle(
-                  color: message.isFromUser
-                      ? Colors.white
-                      : Theme.of(context).textTheme.bodyLarge?.color,
-                ),
-              ),
+              child: Text(message.text),
             ),
           ),
+          const SizedBox(width: 8),
+          if (isUser)
+            CircleAvatar(
+              radius: 18,
+              backgroundImage: NetworkImage(_userAvatarUrl),
+            ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildBubble(_Message message, bool isUser) {
+    return Container(
+      padding: const EdgeInsets.all(12.0),
+      decoration: BoxDecoration(
+        color: isUser
+            ? Theme.of(context).colorScheme.primary.withOpacity(0.8)
+            : Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(18.0),
+      ),
+      child: Text(
+        message.text,
+        style: TextStyle(
+          color: isUser
+              ? Colors.white
+              : Theme.of(context).textTheme.bodyLarge?.color,
+        ),
       ),
     );
   }
