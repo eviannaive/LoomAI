@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loomai_app/src/models/character.dart';
+import 'package:loomai_app/src/views/character_hub/character_detail_screen.dart';
 import 'package:loomai_app/src/views/character_hub/create_character_screen.dart';
 import 'package:loomai_app/src/widgets/navigation_helpers.dart';
 
@@ -15,50 +16,29 @@ class _CharacterHubScreenState extends State<CharacterHubScreen> {
   final List<Character> _characters = [
     Character(
       name: 'Luna',
-      backstory: '',
-      personality: '',
+      backstory: '來自月亮的神秘少女，擁有操控夢境的能力。',
+      personality: '安靜、內向，但內心充滿了對未知世界的好奇。',
       imageUrl:
           'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}',
     ),
     Character(
       name: 'Orion',
-      backstory: '',
-      personality: '',
+      backstory: '來自獵戶座的年輕戰士，為了尋找失落的星圖而踏上旅程。',
+      personality: '勇敢、正直，有著堅定的信念和不屈不撓的精神。',
       imageUrl:
           'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}',
     ),
     Character(
       name: 'Seraphina',
-      backstory: '',
-      personality: '',
+      backstory: '熾天使的後裔，擁有治癒人心的歌聲。',
+      personality: '溫柔、善良，對所有生命都充滿了愛與同情。',
       imageUrl:
           'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}',
     ),
     Character(
       name: 'Kai',
-      backstory: '',
-      personality: '',
-      imageUrl:
-          'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}',
-    ),
-    Character(
-      name: 'Kai',
-      backstory: '',
-      personality: '',
-      imageUrl:
-          'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}',
-    ),
-    Character(
-      name: 'Kai',
-      backstory: '',
-      personality: '',
-      imageUrl:
-          'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}',
-    ),
-    Character(
-      name: 'Kai',
-      backstory: '',
-      personality: '',
+      backstory: '來自深海的神秘少年，能夠與海洋生物溝通。',
+      personality: '自由、不羈，對陸地世界充滿了好奇與探索的慾望。',
       imageUrl:
           'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}',
     ),
@@ -91,8 +71,13 @@ class _CharacterHubScreenState extends State<CharacterHubScreen> {
             ),
             child: InkWell(
               onTap: () {
-                // Navigate to chat with this character
-                print('Start chat with ${character.name}');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        CharacterDetailScreen(character: character),
+                  ),
+                );
               },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -138,7 +123,7 @@ class _CharacterHubScreenState extends State<CharacterHubScreen> {
           final newCharacter = await navigateToCreateCharacter(context);
           if (newCharacter != null) {
             setState(() {
-              _characters.add(newCharacter); // 這裡才能存取 _characters
+              _characters.add(newCharacter);
             });
           }
         },

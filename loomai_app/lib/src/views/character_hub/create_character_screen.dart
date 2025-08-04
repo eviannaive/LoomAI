@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loomai_app/src/models/character.dart';
 import 'package:loomai_app/src/theme/input_styles.dart';
+import 'package:loomai_app/src/widgets/gender_field.dart';
 
 class CreateCharacterScreen extends StatefulWidget {
   const CreateCharacterScreen({super.key});
@@ -18,6 +19,9 @@ class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
   final _templateController = TextEditingController();
   final _templateDescController = TextEditingController();
   final _greetingController = TextEditingController();
+  final _tagsController = TextEditingController();
+  final _genderController = TextEditingController();
+  String genderValue = '';
 
   @override
   void dispose() {
@@ -27,6 +31,9 @@ class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
     _templateController.dispose();
     _templateDescController.dispose();
     _greetingController.dispose();
+    _tagsController.dispose();
+    _genderController.dispose();
+
     super.dispose();
   }
 
@@ -39,6 +46,8 @@ class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
         imageUrl: _imageUrlController.text,
         greeting: _greetingController.text,
         userName: _userNameController.text,
+        tags: _tagsController.text,
+        gender: _genderController.text,
       );
       Navigator.of(context).pop(newCharacter);
     }
@@ -76,9 +85,15 @@ class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
                     (value == null || value.isEmpty) ? '請輸入角色名稱' : null,
               ),
               const SizedBox(height: 16),
+              GenderField(
+                onChanged: (value) {
+                  genderValue = value; // 儲存選擇的性別值
+                },
+              ),
+              const SizedBox(height: 16),
 
               const Text(
-                '你希望 AI 怎麼稱呼你？',
+                '你的名稱？',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
@@ -122,7 +137,6 @@ class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
                 maxLines: 5,
                 decoration: softInputDecoration('簡短描述這個角色的用途或設計理念，或是使用方式'),
               ),
-
               const SizedBox(height: 16),
 
               const Text('開場語句', style: TextStyle(fontWeight: FontWeight.bold)),
@@ -132,6 +146,17 @@ class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
                 maxLines: 5,
                 decoration: softInputDecoration('當你開啟對話時，角色會說的第一句話'),
               ),
+
+              const SizedBox(height: 16),
+
+              const Text('標籤', style: TextStyle(fontWeight: FontWeight.bold)),
+              const SizedBox(height: 8),
+              TextFormField(
+                controller: _tagsController,
+                maxLines: 1,
+                decoration: softInputDecoration('#同人#戀與深空'),
+              ),
+
               const SizedBox(height: 24),
               Center(
                 child: ElevatedButton(

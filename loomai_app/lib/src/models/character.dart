@@ -5,6 +5,8 @@ class Character {
   final String imageUrl;
   final String greeting;
   final String userName;
+  final String tags;
+  final String gender;
 
   Character({
     required this.name,
@@ -13,5 +15,7 @@ class Character {
     required this.imageUrl,
     this.greeting = '',
     this.userName = '',
+    this.tags = '',
+    this.gender = 'male',
   });
 }
