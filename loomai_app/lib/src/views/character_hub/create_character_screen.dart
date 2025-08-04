@@ -205,11 +205,13 @@ class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
                       backgroundImage:
                           (_userAvatarUrlController.text.isNotEmpty)
                           ? NetworkImage(_userAvatarUrlController.text)
-                          : (_aiAvatar != null ? FileImage(_aiAvatar!) : null)
+                          : (_userAvatar != null
+                                    ? FileImage(_userAvatar!)
+                                    : null)
                                 as ImageProvider?,
                       child:
                           (_userAvatarUrlController.text.isEmpty &&
-                              _aiAvatar == null)
+                              _userAvatar == null)
                           ? const Icon(Icons.add_a_photo, size: 24)
                           : null,
                     ),
