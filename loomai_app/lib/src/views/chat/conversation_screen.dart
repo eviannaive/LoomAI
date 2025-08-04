@@ -102,6 +102,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
             ? MainAxisAlignment.end
             : MainAxisAlignment.start,
         children: [
+          // 如果是角色，大頭貼設置在前方
           if (!isUser)
             CircleAvatar(
               radius: 18,
@@ -119,6 +120,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
             ),
           ),
           const SizedBox(width: 8),
+          // 如果是使用者，大頭貼設置在後方
           if (isUser)
             CircleAvatar(
               radius: 18,

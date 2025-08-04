@@ -30,17 +30,20 @@ class _ChatScreenState extends State<ChatScreen> {
       characterName: 'Luna',
       lastMessage:
           'Hey, I was just thinking about that cafe we talked about...',
-      avatarUrl: 'assets/avatars/luna.png', // Placeholder path
+      avatarUrl:
+          'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}', // Placeholder path
     ),
     _ChatSession(
       characterName: 'Orion',
       lastMessage: 'The data stream is fascinating today.',
-      avatarUrl: 'assets/avatars/orion.png',
+      avatarUrl:
+          'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}',
     ),
     _ChatSession(
       characterName: 'Seraphina',
       lastMessage: 'Did you see the sunrise this morning? It was beautiful.',
-      avatarUrl: 'assets/avatars/seraphina.png',
+      avatarUrl:
+          'https://api.hanximeng.com/ranimg/api.php?ts=${DateTime.now().millisecondsSinceEpoch}${UniqueKey()}',
     ),
   ];
 
@@ -78,15 +81,18 @@ class _ChatScreenState extends State<ChatScreen> {
         itemBuilder: (context, index) {
           final session = _chatSessions[index];
           return ListTile(
-            leading: CircleAvatar(
-              // In a real app, you'd use Image.asset or Image.network
-              // For now, we'll just show the first letter of the name.
-              backgroundColor: Theme.of(context).colorScheme.secondary,
-              child: Text(
-                session.characterName[0],
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
+            leading: session.avatarUrl != null && session.avatarUrl.isNotEmpty
+                ? CircleAvatar(
+                    radius: 18,
+                    backgroundImage: NetworkImage(session.avatarUrl),
+                  )
+                : CircleAvatar(
+                    backgroundColor: Theme.of(context).colorScheme.secondary,
+                    child: Text(
+                      session.characterName[0],
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ),
             title: Text(session.characterName),
             subtitle: Text(
               session.lastMessage,
