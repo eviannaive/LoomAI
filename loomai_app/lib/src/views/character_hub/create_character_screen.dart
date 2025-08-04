@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loomai_app/src/models/character.dart';
+import 'package:loomai_app/src/theme/input_styles.dart';
 
 class CreateCharacterScreen extends StatefulWidget {
   const CreateCharacterScreen({super.key});
@@ -10,29 +11,35 @@ class CreateCharacterScreen extends StatefulWidget {
 
 class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
-  final _backstoryController = TextEditingController();
-  final _personalityController = TextEditingController();
+
+  final _aiNameController = TextEditingController();
+  final _userNameController = TextEditingController();
   final _imageUrlController = TextEditingController();
+  final _templateController = TextEditingController();
+  final _templateDescController = TextEditingController();
+  final _greetingController = TextEditingController();
 
   @override
   void dispose() {
-    _nameController.dispose();
-    _backstoryController.dispose();
-    _personalityController.dispose();
+    _aiNameController.dispose();
+    _userNameController.dispose();
     _imageUrlController.dispose();
+    _templateController.dispose();
+    _templateDescController.dispose();
+    _greetingController.dispose();
     super.dispose();
   }
 
   void _saveCharacter() {
     if (_formKey.currentState!.validate()) {
       final newCharacter = Character(
-        name: _nameController.text,
-        backstory: _backstoryController.text,
-        personality: _personalityController.text,
+        name: _aiNameController.text,
+        backstory: _templateDescController.text,
+        personality: _templateController.text,
         imageUrl: _imageUrlController.text,
+        greeting: _greetingController.text,
+        userName: _userNameController.text,
       );
-      // Pass the new character back to the previous screen
       Navigator.of(context).pop(newCharacter);
     }
   }
@@ -57,57 +64,82 @@ class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              const Text(
+                'AI 名稱',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
               TextFormField(
-                controller: _nameController,
-                decoration: const InputDecoration(
-                  labelText: 'Name',
-                  hintText: 'E.g., Luna, Orion',
-                  border: OutlineInputBorder(),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a name';
-                  }
-                  return null;
-                },
+                controller: _aiNameController,
+                decoration: softInputDecoration('例如 Luna、Orion'),
+                validator: (value) =>
+                    (value == null || value.isEmpty) ? '請輸入角色名稱' : null,
               ),
               const SizedBox(height: 16),
+
+              const Text(
+                '你希望 AI 怎麼稱呼你？',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
+              TextFormField(
+                controller: _userNameController,
+                decoration: softInputDecoration('例如 小彤、大王、主銀'),
+              ),
+              const SizedBox(height: 16),
+
+              const Text(
+                'AI 頭像網址',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
               TextFormField(
                 controller: _imageUrlController,
-                decoration: const InputDecoration(
-                  labelText: 'Image URL',
-                  hintText: 'E.g., https://example.com/image.png',
-                  border: OutlineInputBorder(),
+                decoration: softInputDecoration(
+                  '例如 https://api.hanximeng.com/ranimg/api.php',
                 ),
               ),
               const SizedBox(height: 16),
+
+              const Text(
+                '角色模板內容',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
               TextFormField(
-                controller: _backstoryController,
-                decoration: const InputDecoration(
-                  labelText: 'Backstory',
-                  hintText: 'Describe their history and background.',
-                  border: OutlineInputBorder(),
+                controller: _templateController,
+                maxLines: 16,
+                decoration: softInputDecoration(
+                  '描述角色的語氣、知識、風格，例如：你是個天真浪漫、愛開玩笑的虛擬女友。',
                 ),
+              ),
+              const SizedBox(height: 16),
+
+              const Text('模板簡介', style: TextStyle(fontWeight: FontWeight.bold)),
+              const SizedBox(height: 8),
+              TextFormField(
+                controller: _templateDescController,
                 maxLines: 5,
+                decoration: softInputDecoration('簡短描述這個角色的用途或設計理念，或是使用方式'),
               ),
+
               const SizedBox(height: 16),
+
+              const Text('開場語句', style: TextStyle(fontWeight: FontWeight.bold)),
+              const SizedBox(height: 8),
               TextFormField(
-                controller: _personalityController,
-                decoration: const InputDecoration(
-                  labelText: 'Personality & System Prompt',
-                  hintText:
-                      'Define their traits, speaking style, likes, and dislikes. This will be used as the OpenAI system message.',
-                  border: OutlineInputBorder(),
-                ),
-                maxLines: 8,
+                controller: _greetingController,
+                maxLines: 5,
+                decoration: softInputDecoration('當你開啟對話時，角色會說的第一句話'),
               ),
               const SizedBox(height: 24),
               Center(
                 child: ElevatedButton(
                   onPressed: _saveCharacter,
-                  child: const Text('Save Character'),
+                  child: const Text('建立角色'),
                 ),
               ),
+              const SizedBox(height: 16),
             ],
           ),
         ),

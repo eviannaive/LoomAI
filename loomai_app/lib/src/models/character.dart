@@ -3,11 +3,15 @@ class Character {
   final String backstory;
   final String personality;
   final String imageUrl;
+  final String greeting;
+  final String userName;
 
   Character({
     required this.name,
     required this.backstory,
     required this.personality,
-    this.imageUrl = 'https://api.hanximeng.com/ranimg/api.php',
+    required this.imageUrl,
+    this.greeting = '',
+    this.userName = '',
   });
 }
