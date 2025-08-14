@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:loomai_app/src/models/character.dart';
 import 'package:loomai_app/src/theme/input_styles.dart';
+import 'package:loomai_app/src/theme/theme.dart';
 import 'package:loomai_app/src/widgets/gender_field.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -108,7 +109,7 @@ class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('創造角色'),
+        title: Text(widget.character != null ? '編輯角色' : '創造角色'),
         actions: [
           IconButton(
             icon: const Icon(Icons.save),
@@ -264,10 +265,37 @@ class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
 
               const SizedBox(height: 24),
               Center(
-                child: ElevatedButton(
-                  onPressed: _saveCharacter,
-                  child: const Text('建立角色'),
-                ),
+                child: widget.character != null
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              elevation: 0, // 陰影(懸浮的幅度)
+                              backgroundColor: Colors.white, // 背景白色
+                              foregroundColor: Theme.of(
+                                context,
+                              ).colorScheme.primary, // 文字顏色
+                              side: BorderSide(
+                                color: Colors.grey.withOpacity(0.5),
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context); // 取消就直接返回
+                            },
+                            child: const Text('取消'),
+                          ),
+                          const SizedBox(width: 16),
+                          ElevatedButton(
+                            onPressed: _saveCharacter,
+                            child: const Text('儲存'),
+                          ),
+                        ],
+                      )
+                    : ElevatedButton(
+                        onPressed: _saveCharacter,
+                        child: const Text('建立角色'),
+                      ),
               ),
               const SizedBox(height: 16),
             ],

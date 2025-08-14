@@ -32,7 +32,7 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'LoomAI',
-      theme: AppTheme.vibrantVioletTheme,
+      theme: AppTheme.vibrantVioletTheme, // 套用這個主題
       home: Scaffold(
         body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
         bottomNavigationBar: BottomNavigationBar(
